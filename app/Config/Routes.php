@@ -29,6 +29,12 @@ $routes->set404Override();
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
+
+$routes->group('admin', static function ($routes)
+{
+    $routes->get('/productos', 'Admin\Productos::index');
+});
+
 $routes->get('/',       'Home::index');
 
 $routes->get('/productos',                      'Productos::index');
@@ -52,13 +58,12 @@ $routes->delete('/almacen/(:num)',              'Almacen::delete/$1');
 $routes->get('upload',          'Galeria::index');
 $routes->post('upload',         'Galeria::subir');
 
+service('auth')->routes($routes);
 
 
 
-$routes->group('admin', static function ($routes)
-{
-    $routes->get('/productos', 'Admin\Productos::index');
-});
+
+
 
 
 /*

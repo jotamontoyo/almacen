@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\ProductosModel;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Productos extends BaseController
 {
@@ -20,6 +21,18 @@ class Productos extends BaseController
 
     public function index()
     {
+
+        if (!auth()->user()) {
+            /*return $this->respond($this->genericResponse(
+                ResponseInterface::HTTP_INTERNAL_SERVER_ERROR,
+                'Invalid credentials',
+                true,
+                []
+            ), ResponseInterface::HTTP_INTERNAL_SERVER_ERROR); */
+            echo ResponseInterface::HTTP_INTERNAL_SERVER_ERROR;
+            return redirect()->back()->withInput()->with('error', 'No tiene acceso');
+            exit;
+        }
         $db = \Config\Database::connect(); // conexion a db
         /*$condicion = ['estatus' => 1, 'stock >' => 4];
         $query = $db->table('productos')

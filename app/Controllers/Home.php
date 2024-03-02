@@ -2,34 +2,28 @@
 
 namespace App\Controllers;
 
-use Throwable;
+
+use CodeIgniter\HTTP\ResponseInterface;
 
 class Home extends BaseController
 {
+    protected $helpers = ['shield'];
+
     public function index()
     {
-        // return view('welcome_message');
-        // echo "Hola CI4";
-
-        
-        /*$migrate = \Config\Services::migrations();
-        try {
-            $migrate->latest(); //ejecuta la ultima migracion definida en \Database\Migrations. Tambien se puede desde la termial: php spark migrate
-            //$migrate ->regress(-1);
-        } 
-        catch(Throwable $e)
-        {
-            echo $e;
-        }*/
-
-        /*$seeder = \Config\Database::seeder(); 
-        $seeder->call('CategoriasSeeder'); //procesa el seeder. Desde terminal php spark db:seed CategoriasSeeder */
-
-        /*helper('util_helper');
-        echo generaToken();*/
-
- 
+        if (!auth()->user()) {
+            /*return $this->respond($this->genericResponse(
+                ResponseInterface::HTTP_INTERNAL_SERVER_ERROR,
+                'Invalid credentials',
+                true,
+                []
+            ), ResponseInterface::HTTP_INTERNAL_SERVER_ERROR); */
+            echo ResponseInterface::HTTP_INTERNAL_SERVER_ERROR;
+            return redirect()->back()->withInput()->with('error', 'No tiene acceso');
+            exit;
+        }
+       
+        return view('index');
     }
 
-    
 }
