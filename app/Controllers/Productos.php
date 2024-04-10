@@ -22,17 +22,19 @@ class Productos extends BaseController
     public function index()
     {
 
-        if (!auth()->user()) {
+        /*if (!auth()->user()) {
             /*return $this->respond($this->genericResponse(
                 ResponseInterface::HTTP_INTERNAL_SERVER_ERROR,
                 'Invalid credentials',
                 true,
                 []
             ), ResponseInterface::HTTP_INTERNAL_SERVER_ERROR); */
-            echo ResponseInterface::HTTP_INTERNAL_SERVER_ERROR;
+        /*    echo ResponseInterface::HTTP_INTERNAL_SERVER_ERROR;
             return redirect()->back()->withInput()->with('error', 'No tiene acceso');
             exit;
-        }
+        }*/
+
+
         $db = \Config\Database::connect(); // conexion a db
         /*$condicion = ['estatus' => 1, 'stock >' => 4];
         $query = $db->table('productos')
@@ -52,6 +54,15 @@ class Productos extends BaseController
         $query->where(['productos.fecha_elimina' => NULL]);
         $query = $query->get();
         $resultado = $query->getResultArray();
+
+        /*$productObject = new ProductosModel();
+        $user_data = $productObject->findById(auth()->id());
+        $token = $user_data->generateAccessToken("Api Shield");
+        $auth_token = $token->raw_token;*/
+
+        
+
+
  //       echo $db->getLastQuery(); // muestra el SQL
 
 //        $productoModel = new ProductosModel();
@@ -248,4 +259,18 @@ class Productos extends BaseController
         return redirect('Productos::index');
     }
 
-}?>
+
+
+
+
+    public function invalidRequest() 
+    {
+        
+        return redirect()->back()->withInput()->with('error', 'Acceso prohibido');
+        
+    }
+
+
+
+
+}

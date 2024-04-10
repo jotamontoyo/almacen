@@ -37,7 +37,7 @@ $routes->group('admin', static function ($routes)
 
 $routes->get('/',       'Home::index');
 
-$routes->get('/productos',                      'Productos::index');
+$routes->get('/productos',                      'Productos::index'); //, ['filter' => 'apiauth']);
 $routes->get('/productos/new',                  'Productos::new');
 $routes->post('/productos',                     'Productos::create');
 $routes->get('/productos/(:num)',               'Productos::show/$1');
@@ -45,6 +45,8 @@ $routes->get('/productos/(:num)/edit',          'Productos::edit/$1');
 $routes->put('/productos/(:num)',               'Productos::update/$1');
 $routes->get('/productos/(:alpha)/(:num)',      'Productos::cat/$1/$2');
 $routes->delete('/productos/(:num)',            'Productos::delete/$1');
+
+$routes->get('invalid',  'Productos::invalidRequest');
 
 $routes->get('/almacen/new',                    'Almacen::new');
 $routes->get('/almacen',                        'Almacen::index');
@@ -59,6 +61,8 @@ $routes->get('upload',          'Galeria::index');
 $routes->post('upload',         'Galeria::subir');
 
 service('auth')->routes($routes);
+
+//$routes->get('logout', 'LoginController::logoutAction');
 
 
 

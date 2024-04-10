@@ -7,7 +7,7 @@ use CodeIgniter\HTTP\ResponseInterface;
 
 class Home extends BaseController
 {
-    protected $helpers = ['shield'];
+    
 
     public function index()
     {

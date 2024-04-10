@@ -38,6 +38,7 @@
 
     <div class="container">
 
+      
       <?php echo $this->include('plantillas/menu'); ?>
 
       <?php echo $this->renderSection('contenido'); ?>

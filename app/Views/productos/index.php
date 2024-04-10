@@ -3,6 +3,10 @@
 
     <?php echo $this->section('contenido'); ?>
 
+
+    <?php echo csrf_field(); ?> <!-- escrito asi toma el nombre de $tokenName del Security.php -->
+    
+
     <h2 class="mb-4">Productos</h2>
 
     <br>
@@ -34,6 +38,7 @@
 
 
 </style>
+
 
 
 <table class="">
